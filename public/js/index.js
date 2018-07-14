@@ -9,11 +9,12 @@ socket.on('connect', function() {
   });
 
   socket.on('newMessage', function (message) {
+ var formattedTime = moment(message.createdAt).format('h:mm a');
     console.log('Messagex: ', message);
     var li = jQuery('<li></li>');
     try {
       var xx = `${message.from}:  ${message.text}`;
-    li.text(`${message.from}: ${message.text}`);
+    li.text(`${message.from}: ${formattedTime} ${message.text}`);
 
     console.log('inside index.js new message ', li, ' : ', xx);
     jQuery('#messages').append(li);
@@ -35,10 +36,11 @@ socket.on('connect', function() {
 // });
 
  socket.on('newLocationMessage', function(message) {
+var formattedTime = moment(message.createdAt).format('h:mm a');
    var li = jQuery('<li></li>');
    var a = jQuery('<a target="_blank">My current location</a>');
 
-     li.text(`${message.from}: `);
+     li.text(`${message.from}: ${formattedTime} `);
      a.attr('href', message.url);
     li.append(a);
     jQuery('#messages').append(li);
