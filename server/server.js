@@ -33,7 +33,7 @@ try {
   //   console.log('create email ', newEmail);
   // });
 
-  socket.on('createMessage', (message) => {
+  socket.on('createMessage', (message, callback) => {
     console.log('Message: ', message);
     // io.emit('newMessage', {
     //   from: message.from,
@@ -41,6 +41,7 @@ try {
     //   createdAt: new Date().getTime()
     // });
      io.emit('newMessage', generateMessage(message.from, message.text));
+     callback();
    // socket.broadcast.emit('newMessage', {
    //   from: message.from,
    //   text: message.text,
